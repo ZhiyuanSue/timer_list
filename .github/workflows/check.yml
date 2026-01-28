@@ -30,10 +30,10 @@ jobs:
         run: cargo fmt --all -- --check
 
       - name: Build
-        run: cargo build --target ${{ matrix.targets }}
+        run: cargo build -Z build-std=core,alloc --target ${{ matrix.targets }}
 
       - name: Run clippy
-        run: cargo clippy --target ${{ matrix.targets }} -- -D warnings
+        run: cargo clippy -Z build-std=core,alloc --target ${{ matrix.targets }} -- -D warnings
 
       - name: Build documentation
-        run: cargo doc --no-deps --target ${{ matrix.targets }}
+        run: cargo doc -Z build-std=core,alloc --no-deps --target ${{ matrix.targets }}
